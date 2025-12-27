@@ -1,120 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Email Auto-Reply - Login</title>
+    <!-- Bootswatch Sketchy Theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/sketchy/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
+
 <body class="login-page">
     <div class="background-animation">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
         <div class="gradient-orb orb-3"></div>
     </div>
-    
-    <div class="login-container">
-        <div class="login-card">
-            <div class="login-header">
-                <div class="logo-container">
-                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 8L10.89 13.26C11.55 13.67 12.45 13.67 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <h1 class="login-title">AI Email Auto-Reply</h1>
-                <p class="login-subtitle">Intelligent email assistant powered by custom AI</p>
-            </div>
-            
-            <form id="loginForm" class="login-form">
-                <div class="form-group">
-                    <label for="email" class="form-label">
-                        <svg class="label-icon" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+
+    <div class="login-container container d-flex flex-column align-items-center justify-content-center min-vh-100">
+        <div class="login-card card shadow-lg p-4" style="max-width: 500px; width: 100%; border-width: 2px;">
+            <div class="card-body">
+                <div class="login-header text-center mb-4">
+                    <div class="logo-container mb-2">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            style="width: 48px; height: 48px;">
+                            <path
+                                d="M3 8L10.89 13.26C11.55 13.67 12.45 13.67 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        Email Address
-                    </label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        class="form-input" 
-                        placeholder="your.email@example.com"
-                        required
-                        autocomplete="email"
-                    >
-                    <span class="input-error" id="emailError"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password" class="form-label">
-                        <svg class="label-icon" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
-                        </svg>
-                        App Password
-                    </label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        class="form-input" 
-                        placeholder="Enter your app password"
-                        required
-                        autocomplete="current-password"
-                    >
-                    <span class="input-error" id="passwordError"></span>
-                </div>
-                
-                <div class="info-box">
-                    <svg class="info-icon" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
-                    </svg>
-                    <div class="info-content">
-                        <strong>Gmail Users:</strong> Use an app-specific password, not your regular password.
-                        <a href="https://myaccount.google.com/apppasswords" target="_blank" class="info-link">Generate one here</a>
                     </div>
+                    <h1 class="login-title h3 card-title">AI Email Auto-Reply</h1>
+                    <p class="login-subtitle text-muted">Intelligent email assistant powered by custom AI</p>
                 </div>
-                
-                <button type="submit" class="btn-primary" id="loginButton">
-                    <span class="btn-text">Sign In</span>
-                    <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                    </svg>
-                </button>
-                
-                <div class="loading-overlay" id="loadingOverlay">
-                    <div class="spinner"></div>
-                    <p class="loading-text">Connecting to email server...</p>
+
+                <form id="loginForm" class="login-form">
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label d-flex align-items-center">
+                            <svg class="label-icon me-2" viewBox="0 0 20 20" fill="currentColor"
+                                style="width: 16px; height: 16px;">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                            Email Address
+                        </label>
+                        <input type="email" id="email" name="email" class="form-control"
+                            placeholder="your.email@example.com" required autocomplete="email">
+                        <span class="text-danger small" id="emailError"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label d-flex align-items-center">
+                            <svg class="label-icon me-2" viewBox="0 0 20 20" fill="currentColor"
+                                style="width: 16px; height: 16px;">
+                                <path fill-rule="evenodd"
+                                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            App Password
+                        </label>
+                        <input type="password" id="password" name="password" class="form-control"
+                            placeholder="Enter your app password" required autocomplete="current-password">
+                        <span class="text-danger small" id="passwordError"></span>
+                    </div>
+
+                    <div class="info-box alert alert-info d-flex align-items-start small p-2 mb-3">
+                        <svg class="info-icon me-2" viewBox="0 0 20 20" fill="currentColor"
+                            style="width: 20px; height: 20px; flex-shrink: 0;">
+                            <path fill-rule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <div>
+                            <strong>Gmail Users:</strong> Use an app-specific password.
+                            <a href="https://myaccount.google.com/apppasswords" target="_blank"
+                                class="alert-link">Generate one here</a>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="btn btn-primary w-100 d-flex align-items-center justify-content-center py-2"
+                        id="loginButton">
+                        <span class="btn-text">Sign In</span>
+                        <svg class="btn-icon ms-2" viewBox="0 0 20 20" fill="currentColor"
+                            style="width: 16px; height: 16px;">
+                            <path fill-rule="evenodd"
+                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+
+                    <div class="loading-overlay d-none" id="loadingOverlay">
+                        <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                        <span class="loading-text">Connecting...</span>
+                    </div>
+                </form>
+
+                <div class="alert alert-danger mt-3 d-none" id="errorAlert">
+                    <span id="errorMessage"></span>
                 </div>
-            </form>
-            
-            <div class="alert alert-error" id="errorAlert">
-                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                </svg>
-                <span id="errorMessage"></span>
             </div>
         </div>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3 class="feature-title">Custom AI Engine</h3>
-                <p class="feature-description">Intelligent responses with intent detection and tone matching</p>
+
+        <div class="features-grid row g-3 mt-4 w-100" style="max-width: 800px;">
+            <div class="col-md-4">
+                <div class="feature-card card h-100 p-3 text-center border-2">
+                    <div class="feature-icon mb-2" style="font-size: 2rem;">🤖</div>
+                    <h3 class="feature-title h5">Custom AI Engine</h3>
+                    <p class="feature-description small text-muted">Intelligent responses with intent detection and tone
+                        matching</p>
+                </div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3 class="feature-title">Real-time Monitoring</h3>
-                <p class="feature-description">Automatic inbox checking and instant reply generation</p>
+            <div class="col-md-4">
+                <div class="feature-card card h-100 p-3 text-center border-2">
+                    <div class="feature-icon mb-2" style="font-size: 2rem;">⚡</div>
+                    <h3 class="feature-title h5">Real-time Monitoring</h3>
+                    <p class="feature-description small text-muted">Automatic inbox checking and instant reply
+                        generation</p>
+                </div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <h3 class="feature-title">Beautiful Emails</h3>
-                <p class="feature-description">Professional HTML templates with modern design</p>
+            <div class="col-md-4">
+                <div class="feature-card card h-100 p-3 text-center border-2">
+                    <div class="feature-icon mb-2" style="font-size: 2rem;">🎨</div>
+                    <h3 class="feature-title h5">Beautiful Emails</h3>
+                    <p class="feature-description small text-muted">Professional HTML templates with modern design</p>
+                </div>
             </div>
         </div>
     </div>
-    
+
     <script src="/static/js/app.js"></script>
 </body>
+
 </html>

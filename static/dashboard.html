@@ -5,31 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - AI Email Auto-Reply</title>
+    <!-- Bootswatch Sketchy Theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/sketchy/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 
-<body class="dashboard-page">
-    <div class="dashboard-container">
+<body class="dashboard-page bg-light">
+    <div class="dashboard-container container py-4">
         <!-- Header -->
-        <header class="dashboard-header">
-            <div class="header-content">
-                <div class="header-left">
-                    <svg class="header-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <header class="dashboard-header card mb-4 border-2">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div class="header-left d-flex align-items-center">
+                    <svg class="header-logo me-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="width: 40px; height: 40px;">
                         <path
                             d="M3 8L10.89 13.26C11.55 13.67 12.45 13.67 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <div>
-                        <h1 class="header-title">AI Email Auto-Reply</h1>
-                        <p class="header-subtitle" id="userEmail">Loading...</p>
+                        <h1 class="header-title h4 mb-0">AI Email Auto-Reply</h1>
+                        <p class="header-subtitle text-muted mb-0 small" id="userEmail">Loading...</p>
                     </div>
                 </div>
-                <button class="btn-secondary" id="logoutButton">
-                    <svg class="btn-icon-left" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"
-                            clip-rule="evenodd" />
-                    </svg>
+                <button class="btn btn-outline-danger btn-sm" id="logoutButton">
                     Logout
                 </button>
             </div>
@@ -38,88 +36,65 @@
         <!-- Main Content -->
         <main class="dashboard-main">
             <!-- Status Cards -->
-            <div class="status-grid">
-                <div class="status-card">
-                    <div class="status-icon status-icon-primary">
-                        <svg viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <div class="status-content">
-                        <h3 class="status-label">Connection Status</h3>
-                        <p class="status-value" id="connectionStatus">
-                            <span class="status-dot status-dot-loading"></span>
-                            Checking...
-                        </p>
+            <div class="status-grid row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="status-card card h-100 border-2 shadow-sm">
+                        <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+                            <h3 class="status-label h6 text-muted mb-2">Connection Status</h3>
+                            <p class="status-value h5 mb-0" id="connectionStatus">
+                                <span class="badge bg-secondary">Checking...</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="status-card">
-                    <div class="status-icon status-icon-success">
-                        <svg viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                        </svg>
-                    </div>
-                    <div class="status-content">
-                        <h3 class="status-label">Emails Processed</h3>
-                        <p class="status-value" id="processedCount">0</p>
+                <div class="col-md-4">
+                    <div class="status-card card h-100 border-2 shadow-sm">
+                        <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+                            <h3 class="status-label h6 text-muted mb-2">Emails Processed</h3>
+                            <p class="status-value h4 mb-0 font-monospace" id="processedCount">0</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="status-card">
-                    <div class="status-icon status-icon-warning">
-                        <svg viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <div class="status-content">
-                        <h3 class="status-label">Auto-Reply</h3>
-                        <div class="toggle-container">
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="autoreplyToggle">
-                                <span class="toggle-slider"></span>
-                            </label>
-                            <span class="toggle-label" id="autoreplyLabel">Disabled</span>
+                <div class="col-md-4">
+                    <div class="status-card card h-100 border-2 shadow-sm">
+                        <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+                            <h3 class="status-label h6 text-muted mb-2">Auto-Reply</h3>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="form-check form-switch p-0" style="min-height: auto;">
+                                    <input class="form-check-input ms-0" type="checkbox" id="autoreplyToggle"
+                                        role="switch" style="width: 3em; height: 1.5em; cursor: pointer;">
+                                </div>
+                                <span class="toggle-label ms-2 small fw-bold" id="autoreplyLabel">Disabled</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Actions -->
-            <div class="actions-bar">
-                <button class="btn-outline" id="refreshButton">
-                    <svg class="btn-icon-left" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
-                            clip-rule="evenodd" />
-                    </svg>
+            <div class="actions-bar mb-4 d-flex gap-2">
+                <button class="btn btn-outline-primary" id="refreshButton">
                     Refresh Status
                 </button>
 
-                <button class="btn-outline" id="checkNowButton">
-                    <svg class="btn-icon-left" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                    </svg>
+                <button class="btn btn-primary" id="checkNowButton">
                     Check Emails Now
                 </button>
             </div>
 
             <!-- Recent Emails Table -->
-            <div class="table-card">
-                <div class="table-header">
-                    <h2 class="table-title">Recently Processed Emails</h2>
-                    <span class="table-badge" id="emailCount">0 emails</span>
+            <div class="table-card card border-2 shadow-sm">
+                <div
+                    class="card-header bg-white d-flex justify-content-between align-items-center border-bottom border-2">
+                    <h2 class="table-title h5 mb-0">Recently Processed Emails</h2>
+                    <span class="badge bg-info text-dark" id="emailCount">0 emails</span>
                 </div>
 
-                <div class="table-container">
-                    <table class="emails-table">
-                        <thead>
+                <div class="table-responsive p-3">
+                    <table class="table table-hover table-bordered mb-0">
+                        <thead class="table-light">
                             <tr>
                                 <th>Sender</th>
                                 <th>Subject</th>
@@ -130,16 +105,10 @@
                         </thead>
                         <tbody id="emailsTableBody">
                             <tr class="empty-state">
-                                <td colspan="5">
-                                    <div class="empty-state-content">
-                                        <svg class="empty-state-icon" viewBox="0 0 20 20" fill="currentColor">
-                                            <path
-                                                d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                                        </svg>
-                                        <p class="empty-state-text">No emails processed yet</p>
-                                        <p class="empty-state-subtext">Enable auto-reply to start processing incoming
-                                            emails</p>
+                                <td colspan="5" class="text-center py-5">
+                                    <div class="empty-state-content text-muted">
+                                        <p class="mb-1">No emails processed yet</p>
+                                        <p class="small">Enable auto-reply to start processing</p>
                                     </div>
                                 </td>
                             </tr>
