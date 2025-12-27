@@ -16,10 +16,10 @@ A production-ready AI-powered automatic email reply system with real SMTP/IMAP i
 ### 📸 Preview
 
 #### Login Page
-![Login Page](/Users/boon/.gemini/antigravity/brain/7e76b25e-60e5-4473-98b9-5223ede9b5bb/login_page_1766806859513.png)
+![Login Page](https://i.postimg.cc/9F1RqLWD/Screenshot-2568-12-27-at-10-59-13.png)
 
 #### Dashboard
-![Dashboard](/Users/boon/.gemini/antigravity/brain/7e76b25e-60e5-4473-98b9-5223ede9b5bb/dashboard_page_1766807402138.png)
+![Dashboard](https://i.postimg.cc/jdvwJMsQ/Screenshot_2568_12_27_at_10_59_52.png)
 
 ---
 
