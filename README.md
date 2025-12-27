@@ -10,8 +10,16 @@ A production-ready AI-powered automatic email reply system with real SMTP/IMAP i
 - ⚡ **Real-time Monitoring** - Automatic background inbox checking with configurable intervals.
 - 💾 **Permanent History** - Processed emails and history are persisted locally, surviving server restarts.
 - 🛡️ **Thread-Safe Operations** - Robust connection management handling concurrent manual and automatic checks.
-- 🎨 **Modern Dashboard** - Sleek glassmorphism UI with real-time status updates and auto-reply toggle.
+- 🎨 **Neobrutalist UI/UX** - Bold, high-contrast dashboard built with **Bootswatch Brite** and Bootstrap 5.
 - ⚖️ **Apache License 2.0** - Fully open-source and ready for professional use.
+
+### 📸 Preview
+
+#### Login Page
+![Login Page](/Users/boon/.gemini/antigravity/brain/7e76b25e-60e5-4473-98b9-5223ede9b5bb/login_page_1766806859513.png)
+
+#### Dashboard
+![Dashboard](/Users/boon/.gemini/antigravity/brain/7e76b25e-60e5-4473-98b9-5223ede9b5bb/dashboard_page_1766807402138.png)
 
 ---
 
@@ -89,8 +97,8 @@ graph TD
 
 - **Backend**: Python, Flask, Flask-CORS
 - **Email Protocol**: IMAP (imaplib) & SMTP (smtplib)
-- **AI Core**: Custom Rule-based Processor + Optional Ollama (Requests)
-- **Frontend**: Vanilla HTML5, CSS3 (Modern Glassmorphism), ES6 Javascript
+- **AI Core**: Custom AI Processor + Optional Ollama (Requests)
+- **Frontend**: Bootstrap 5, Bootswatch Brite (Neobrutalism), Vanilla Javascript
 - **Persistence**: Local JSON Storage (Thread-safe)
 
 ---

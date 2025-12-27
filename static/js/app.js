@@ -38,15 +38,29 @@ function showToast(message, type = 'success') {
     if (!container) return;
 
     const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    toast.textContent = message;
+    toast.className = `toast show align-items-center text-dark border-4 border-dark rounded-0 mb-3 brutal-card`;
+
+    // Set background color based on type
+    if (type === 'success') toast.classList.add('bg-primary');
+    else if (type === 'error') toast.classList.add('bg-danger');
+    else toast.classList.add('bg-warning');
+
+    toast.role = 'alert';
+    toast.innerHTML = `
+        <div class="d-flex">
+            <div class="toast-body fw-bold text-uppercase">
+                ${message}
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    `;
 
     container.appendChild(toast);
 
     setTimeout(() => {
-        toast.style.animation = 'slideOutRight 0.3s ease-out';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 500);
+    }, 4000);
 }
 
 function formatDate(isoString) {
@@ -93,16 +107,16 @@ if (window.location.pathname === '/' || window.location.pathname === '/index.htm
     // Show error
     function showError(message) {
         errorMessage.textContent = message;
-        errorAlert.classList.add('active');
+        errorAlert.classList.remove('d-none');
 
         setTimeout(() => {
-            errorAlert.classList.remove('active');
+            errorAlert.classList.add('d-none');
         }, 5000);
     }
 
     // Hide error
     function hideError() {
-        errorAlert.classList.remove('active');
+        errorAlert.classList.add('d-none');
     }
 
     // Form submission
@@ -125,7 +139,7 @@ if (window.location.pathname === '/' || window.location.pathname === '/index.htm
         }
 
         // Show loading
-        loadingOverlay.classList.add('active');
+        loadingOverlay.classList.remove('d-none');
         loginButton.disabled = true;
 
         try {
@@ -143,7 +157,7 @@ if (window.location.pathname === '/' || window.location.pathname === '/index.htm
         } catch (error) {
             showError(error.message || 'Connection failed. Please check your credentials.');
         } finally {
-            loadingOverlay.classList.remove('active');
+            loadingOverlay.classList.add('d-none');
             loginButton.disabled = false;
         }
     });
@@ -152,9 +166,9 @@ if (window.location.pathname === '/' || window.location.pathname === '/index.htm
     emailInput.addEventListener('blur', () => {
         const email = emailInput.value.trim();
         if (email && !validateEmail(email)) {
-            emailInput.style.borderColor = 'var(--error-color)';
+            emailInput.classList.add('is-invalid');
         } else {
-            emailInput.style.borderColor = '';
+            emailInput.classList.remove('is-invalid');
         }
     });
 }
@@ -189,25 +203,27 @@ if (window.location.pathname === '/dashboard' || window.location.pathname === '/
             // Connection status
             if (data.connected) {
                 connectionStatus.innerHTML = `
-                    <span class="status-dot status-dot-connected"></span>
+                    <i class="bi bi-patch-check-fill text-dark me-2"></i>
                     Connected
                 `;
+                connectionStatus.parentElement.parentElement.parentElement.querySelector('.bg-primary').classList.replace('bg-primary', 'bg-primary');
             } else if (data.message && data.message.includes('re-authentication')) {
                 connectionStatus.innerHTML = `
-                    <span class="status-dot status-dot-warning" title="${data.message}"></span>
-                    Re-authentication Required
+                    <i class="bi bi-exclamation-octagon-fill text-dark me-2"></i>
+                    Auth Needed
                 `;
+                connectionStatus.classList.add('text-danger');
             } else {
                 connectionStatus.innerHTML = `
-                    <span class="status-dot status-dot-disconnected"></span>
+                    <i class="bi bi-x-circle-fill text-dark me-2"></i>
                     Disconnected
                 `;
             }
 
             // Auto-reply status
             autoreplyToggle.checked = data.autoreply_enabled || false;
-            autoreplyLabel.textContent = data.autoreply_enabled ? 'Enabled' : 'Disabled';
-            autoreplyLabel.style.color = data.autoreply_enabled ? 'var(--success-color)' : 'var(--text-secondary)';
+            autoreplyLabel.textContent = data.autoreply_enabled ? 'ON' : 'OFF';
+            autoreplyLabel.classList.toggle('text-primary', data.autoreply_enabled);
 
         } catch (error) {
             console.error('Failed to load status:', error);
@@ -233,41 +249,25 @@ if (window.location.pathname === '/dashboard' || window.location.pathname === '/
 
                 emailsTableBody.innerHTML = data.emails.map(email => `
                     <tr>
-                        <td>
-                            <div style="font-weight: 600; color: var(--text-primary);">${escapeHtml(email.sender)}</div>
+                        <td class="ps-4">
+                            <div class="fw-bold text-dark">${escapeHtml(email.sender)}</div>
                         </td>
                         <td>
-                            <div style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            <div class="text-truncate" style="max-width: 250px;">
                                 ${escapeHtml(email.subject)}
                             </div>
                         </td>
                         <td>
-                            <span style="
-                                display: inline-block;
-                                padding: 0.25rem 0.625rem;
-                                background-color: var(--bg-secondary);
-                                color: var(--text-secondary);
-                                border-radius: var(--radius-full);
-                                font-size: 0.75rem;
-                                font-weight: 600;
-                            ">
-                                ${capitalizeFirst(email.intent)}
+                            <span class="badge border border-dark border-2 text-dark bg-info text-uppercase">
+                                ${email.intent}
                             </span>
                         </td>
                         <td>
-                            <span style="
-                                display: inline-block;
-                                padding: 0.25rem 0.625rem;
-                                background-color: ${getToneColor(email.tone)};
-                                color: ${getToneTextColor(email.tone)};
-                                border-radius: var(--radius-full);
-                                font-size: 0.75rem;
-                                font-weight: 600;
-                            ">
-                                ${capitalizeFirst(email.tone)}
+                            <span class="badge border border-dark border-2 text-dark text-uppercase" style="background-color: ${getToneColor(email.tone)}">
+                                ${email.tone}
                             </span>
                         </td>
-                        <td style="color: var(--text-secondary);">
+                        <td class="pe-4 fw-bold">
                             ${formatDate(email.timestamp)}
                         </td>
                     </tr>
@@ -303,22 +303,12 @@ if (window.location.pathname === '/dashboard' || window.location.pathname === '/
 
     function getToneColor(tone) {
         const colors = {
-            'formal': '#ede9fe',
-            'friendly': '#dbeafe',
-            'professional': '#f3f4f6',
-            'casual': '#fef3c7'
+            'formal': '#daff00',
+            'friendly': '#0047ff',
+            'professional': '#ff6b00',
+            'casual': '#ffffff'
         };
-        return colors[tone] || colors['professional'];
-    }
-
-    function getToneTextColor(tone) {
-        const colors = {
-            'formal': '#5b21b6',
-            'friendly': '#1e40af',
-            'professional': '#374151',
-            'casual': '#92400e'
-        };
-        return colors[tone] || colors['professional'];
+        return colors[tone] || '#ffffff';
     }
 
     // Toggle auto-reply
@@ -332,12 +322,12 @@ if (window.location.pathname === '/dashboard' || window.location.pathname === '/
             });
 
             if (data.success) {
-                autoreplyLabel.textContent = enabled ? 'Enabled' : 'Disabled';
-                autoreplyLabel.style.color = enabled ? 'var(--success-color)' : 'var(--text-secondary)';
-                showToast(`Auto-reply ${enabled ? 'enabled' : 'disabled'}`, 'success');
+                autoreplyLabel.textContent = enabled ? 'ON' : 'OFF';
+                autoreplyLabel.classList.toggle('text-primary', enabled);
+                showToast(`Auto-Monitoring ${enabled ? 'Started' : 'Stopped'}`, 'success');
             }
         } catch (error) {
-            showToast('Failed to toggle auto-reply', 'error');
+            showToast('Toggle Failed', 'error');
             autoreplyToggle.checked = !enabled; // Revert
         }
     });
@@ -346,8 +336,8 @@ if (window.location.pathname === '/dashboard' || window.location.pathname === '/
     refreshButton.addEventListener('click', async () => {
         refreshButton.disabled = true;
         refreshButton.innerHTML = `
-            <div class="spinner" style="width: 18px; height: 18px; border-width: 2px;"></div>
-            Refreshing...
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Syncing...
         `;
 
         await loadStatus();
@@ -355,20 +345,17 @@ if (window.location.pathname === '/dashboard' || window.location.pathname === '/
 
         refreshButton.disabled = false;
         refreshButton.innerHTML = `
-            <svg class="btn-icon-left" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
-            </svg>
-            Refresh Status
+            <i class="bi bi-arrow-clockwise me-2"></i> Refresh dashboard
         `;
 
-        showToast('Status refreshed', 'success');
+        showToast('Dashboard Synced', 'success');
     });
 
     // Check emails now
     checkNowButton.addEventListener('click', async () => {
         checkNowButton.disabled = true;
         checkNowButton.innerHTML = `
-            <div class="spinner" style="width: 18px; height: 18px; border-width: 2px;"></div>
+            <span class="spinner-border spinner-border-sm me-2"></span>
             Checking...
         `;
 
@@ -378,19 +365,15 @@ if (window.location.pathname === '/dashboard' || window.location.pathname === '/
             });
 
             if (data.success) {
-                showToast(`Found ${data.new_emails} new emails`, 'success');
+                showToast(`Action: ${data.new_emails} emails processed`, 'success');
                 await loadRecentEmails();
             }
         } catch (error) {
-            showToast('Failed to check emails', 'error');
+            showToast('Search Failed', 'error');
         } finally {
             checkNowButton.disabled = false;
             checkNowButton.innerHTML = `
-                <svg class="btn-icon-left" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                </svg>
-                Check Emails Now
+                <i class="bi bi-search me-2"></i> Check now
             `;
         }
     });
