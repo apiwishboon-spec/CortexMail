@@ -1,5 +1,8 @@
 
-# CortexMail 🧠
+<div align="center">
+  <img src="logo.png" alt="CortexMail Logo" width="200"/>
+  <h1>CortexMail 🧠</h1>
+</div>
 
 > "The cortex is the outer layer of the brain. It’s where the good stuff happens: thinking, language, decision-making, context, judgment."
 
