@@ -371,5 +371,5 @@ def check_now():
 
 
 if __name__ == '__main__':
-    logger.info("Starting AI Email Auto-Reply Application")
+    logger.info("Starting CortexMail Application")
     app.run(debug=Config.DEBUG, host='0.0.0.0', port=5001)

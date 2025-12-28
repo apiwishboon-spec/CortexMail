@@ -1,5 +1,5 @@
 /**
- * AI Email Auto-Reply - Frontend Application
+ * CortexMail - Frontend Application
  * Handles login, dashboard, and API communication
  */
 

@@ -1,7 +1,11 @@
 
-# AI Email Auto-Reply Application 📧🤖
+# CortexMail 🧠
 
-A production-ready AI-powered automatic email reply system with real SMTP/IMAP integration, context-aware response generation, and a modern web interface.
+> "The cortex is the outer layer of the brain. It’s where the good stuff happens: thinking, language, decision-making, context, judgment."
+
+**CortexMail** isn't just another auto-reply bot. It's a cognitive email assistant that *understands* context, interprets intent, and makes decisions like a thinking entity. It doesn't just react; it processes.
+
+A production-ready AI-powered email intelligence system with real SMTP/IMAP integration, context-aware cognition, and a robust Neobrutalist web interface.
 
 ## 🌟 Features
 

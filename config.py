@@ -1,5 +1,5 @@
 """
-Configuration management for AI Email Auto-Reply Application
+Configuration management for CortexMail Application
 Handles environment variables and default settings
 """
 
