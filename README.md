@@ -24,10 +24,10 @@ A production-ready AI-powered email intelligence system with real SMTP/IMAP inte
 ### 📸 Preview
 
 #### Login Page
-![Login Page](https://i.postimg.cc/9F1RqLWD/Screenshot-2568-12-27-at-10-59-13.png)
+![Login Page](https://i.postimg.cc/Z5fz06mk/Screenshot_2568_12_28_at_17_11_41.png)
 
 #### Dashboard
-![Dashboard](https://i.postimg.cc/jdvwJMsQ/Screenshot_2568_12_27_at_10_59_52.png)
+![Dashboard](https://i.postimg.cc/Z5fz06mk/Screenshot_2568_12_28_at_17_11_41.png)
 
 ---
 
